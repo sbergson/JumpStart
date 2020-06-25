@@ -8,7 +8,7 @@ api = Api(app)
 class HelloWorld(Resource):
 
   def get(self):
-    connection = cx_Oracle("ADMIN","GarciaDavila34","jumpstartdb_high")
+    connection = cx_Oracle.connect("ADMIN","GarciaDavila34","jumpstartdb_high")
     cursor = connection.cursor()
     query = 'select * from USER_TABLE'
     cursor.execute(query)
