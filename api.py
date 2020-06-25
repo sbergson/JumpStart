@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api
+import cx_Oracle
 
 app = Flask(__name__)
 api = Api(app)
@@ -7,10 +8,15 @@ api = Api(app)
 class HelloWorld(Resource):
 
   def get(self):
-
-    data = {"1":"goodbye world"}
-    data["2"] = "qualquer coisa"
-    return data
+    connection = cx_Oracle("ADMIN","GarciaDavila34","jumpstartdb_high")
+    cursor = connection.cursor()
+    query = 'select * from USER_TABLE'
+    cursor.execute(query)
+    for row in cursor:
+      print row
+    cursor.close()
+    connection.close()
+    return "OK"
 
 api.add_resource(HelloWorld,'/')
 
