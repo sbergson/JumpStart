@@ -12,11 +12,13 @@ class HelloWorld(Resource):
     cursor = connection.cursor()
     query = 'select * from USER_TABLE'
     cursor.execute(query)
+    data = []
     for row in cursor:
+      data.append(row)
       print row
     cursor.close()
     connection.close()
-    return "OK"
+    return data
 
 api.add_resource(HelloWorld,'/')
 
